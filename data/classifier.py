@@ -1,4 +1,5 @@
 import ast
+import os
 from PIL import Image
 import torchvision.transforms as transforms
 from torch.autograd import Variable
@@ -12,7 +13,8 @@ vgg16 = models.vgg16(pretrained=True)
 models = {'resnet': resnet18, 'alexnet': alexnet, 'vgg': vgg16}
 
 # obtain ImageNet labels
-with open('imagenet1000_clsid_to_human.txt') as imagenet_classes_file:
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(_script_dir, 'imagenet1000_clsid_to_human.txt')) as imagenet_classes_file:
     imagenet_classes_dict = ast.literal_eval(imagenet_classes_file.read())
 
 def classifier(img_path, model_name):
