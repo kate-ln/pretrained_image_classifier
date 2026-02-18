@@ -20,7 +20,8 @@
 #           of the pet and classifier labels as the item at index 2 of the list.
 #
 ##
-# Imports classifier function for using CNN to classify images 
+# Imports classifier function for using CNN to classify images
+import os
 from classifier import classifier 
 
 # TODO 3: Define classify_images function below, specifically replace the None
@@ -65,4 +66,14 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    for filename in results_dic:
+        # Build full path to image
+        image_path = os.path.join(images_dir, filename)
+        # Get classifier label and format: lowercase, strip whitespace
+        classifier_label = classifier(image_path, model).lower().strip()
+        # Compare: pet label matches if it equals one of the comma-separated classifier labels
+        pet_label = results_dic[filename][0]
+        classifier_parts = [p.strip() for p in classifier_label.split(",")]
+        is_match = 1 if pet_label in classifier_parts else 0
+        # Add classifier label (index 1) and comparison (index 2) to the list
+        results_dic[filename].extend([classifier_label, is_match])
