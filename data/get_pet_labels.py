@@ -40,6 +40,32 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    return None
+    # Creates list of files in directory
+    in_files = listdir(image_dir)
+
+    # Creates empty dictionary for the results
+    results_dic = {}
+
+    # Processes through each file in the directory
+    for filename in in_files:
+        # Skips file if starts with . (like .DS_Store)
+        if filename.startswith("."):
+            continue
+
+        # Splits filename into name and extension
+        name, ext = filename.rsplit(".", 1) if "." in filename else (filename, "")
+
+        # Skips non-image files (only process common image extensions)
+        if ext.lower() not in ("jpg", "jpeg", "png", "bmp", "gif"):
+            continue
+
+        # Creates pet image label from filename (e.g. Boston_terrier_02259 -> boston terrier)
+        # Filename format: Breed_Name_Number.extension - split by _, drop last part, join with space
+        name_parts = name.split("_")
+        pet_label = " ".join(name_parts[:-1]).lower().strip()
+
+        # Adds key-value pair to results_dic: filename -> [pet_label]
+        results_dic[filename] = [pet_label]
+
+    # Returns the results dictionary
+    return results_dic
