@@ -61,6 +61,33 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
-    None
-                
+    """
+    # Print summary: model and the 6 statistics
+    print("\n** Results for CNN Model Architecture:", model.upper())
+    print("N Images: {:2d}  N Dog Images: {:2d}  N NotDog Images: {:2d}".format(
+          results_stats_dic["n_images"], results_stats_dic["n_dogs_img"],
+          results_stats_dic["n_notdogs_img"]))
+    print("Pct Corr dog: {:5.1f}  Pct Corr NOTdog: {:5.1f}  Pct Corr Breed: {:5.1f}".format(
+          results_stats_dic["pct_correct_dogs"], results_stats_dic["pct_correct_notdogs"],
+          results_stats_dic["pct_correct_breed"]))
+
+    # Optionally print incorrectly classified dogs (pet is dog but classifier said not, or vice versa)
+    if print_incorrect_dogs and (results_stats_dic["n_correct_dogs"] != results_stats_dic["n_dogs_img"] or
+                                 results_stats_dic["n_correct_notdogs"] != results_stats_dic["n_notdogs_img"]):
+        print("\n** Incorrectly Classified Dogs:")
+        for key in results_dic:
+            if results_dic[key][3] != results_dic[key][4]:
+                print("Pet: {:>26}   Classifier: {:>30}".format(
+                      results_dic[key][0], results_dic[key][1]))
+
+    # Optionally print incorrectly classified breeds (both dog but no match)
+    if print_incorrect_breed:
+        n_correct_breed = results_stats_dic["n_correct_breed"]
+        n_dogs_img = results_stats_dic["n_dogs_img"]
+        if n_dogs_img > 0 and n_correct_breed < n_dogs_img:
+            print("\n** Incorrectly Classified Dog Breeds:")
+            for key in results_dic:
+                if results_dic[key][3] == 1 and results_dic[key][4] == 1 and results_dic[key][2] == 0:
+                    print("Pet: {:>26}   Classifier: {:>30}".format(
+                          results_dic[key][0], results_dic[key][1]))
+
