@@ -1,0 +1,69 @@
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = vgg 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 4 key-value pairs.
+Below are 4 of them:
+ 1 key:              Brown_Bear_01.jpg  label:                 brown bear
+ 2 key:                     Dog_01.jpg  label:                        dog
+ 3 key:                 Tea_Cup_01.jpg  label:                    tea cup
+ 4 key:                     Dog_02.jpg  label:                        dog
+
+     MATCH:
+
+             Brown_Bear_01.jpg: 
+Real:                 brown bear   Classifier: brown bear, bruin, ursus arctos
+
+ NOT A MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: malamute, malemute, alaskan malamute
+
+                Tea_Cup_01.jpg: 
+Real:                    tea cup   Classifier:                            cup
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:                 siberian husky
+
+# Total Images 4 # Matches: 1 # NOT Matches: 3
+
+     MATCH:
+
+             Brown_Bear_01.jpg: 
+Real:                 brown bear   Classifier: brown bear, bruin, ursus arctos  
+PetLabelDog: 0  ClassLabelDog: 0
+
+ NOT A MATCH:
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier: malamute, malemute, alaskan malamute  
+PetLabelDog: 1  ClassLabelDog: 1
+
+                Tea_Cup_01.jpg: 
+Real:                    tea cup   Classifier:                            cup  
+PetLabelDog: 0  ClassLabelDog: 0
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:                 siberian husky  
+PetLabelDog: 1  ClassLabelDog: 1
+
+# Total Images 4 # Matches: 1 # NOT Matches: 3
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+** Results for CNN Model Architecture: VGG
+N Images:  4  N Dog Images:  2  N NotDog Images:  2
+Pct Corr dog: 100.0  Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+** Incorrectly Classified Dog Breeds:
+Pet:                        dog   Classifier: malamute, malemute, alaskan malamute
+Pet:                        dog   Classifier:                 siberian husky
+
+** Total Elapsed Runtime: 0:0:0
